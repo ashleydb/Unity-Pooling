@@ -16,35 +16,10 @@ public class CubePool : ObjectPool
 
         for (int i = 0; i < poolSize_; ++i)
         {
-            // This gets an object, then sets the position, (opposite to the ParticlePool example)
+            // This gets an object, then sets the position, (different to the ParticlePool example)
             GameObject obj = Create();
             obj.transform.position = new Vector3(2 * i, 0.5f, 0.0f);
         }
-    }
-
-    // Overrides base class, (uses new keyword)
-    // Get an object from the pool, just activate it at whatever position it was before
-    new public GameObject Create()
-    {
-        GameObject obj = base.Create();
-        if (obj != null)
-        {
-            obj.SetActive(true);
-        }
-        return obj;
-    }
-
-    // Get an object from the pool, then position it in the world and activate
-    public GameObject Create(Transform at)
-    {
-        GameObject obj = base.Create();
-        if (obj != null)
-        {
-            obj.transform.position = at.position;
-            obj.transform.rotation = at.rotation;
-            obj.SetActive(true);
-        }
-        return obj;
     }
 
 }

@@ -30,7 +30,22 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    // Return an object from our inactive list, if there is one available
+    // Return an object from our inactive list, if there is one available. Leaves it to the caller to activate the object.
+    public GameObject CreateInactive()
+    {
+        if (pool_.Count > 0)
+        {
+            GameObject obj = pool_[0];
+            active_pool_.Add(obj);
+            pool_.RemoveAt(0);
+
+            return obj;
+        }
+        Debug.Log("No available objects in pool.");
+        return null;
+    }
+
+    // Return an activated object from our inactive list, if there is one available
     public GameObject Create()
     {
         if (pool_.Count > 0)
@@ -38,6 +53,87 @@ public class ObjectPool : MonoBehaviour
             GameObject obj = pool_[0];
             active_pool_.Add(obj);
             pool_.RemoveAt(0);
+
+            // Unique to this Create() method
+            obj.SetActive(true);
+
+            return obj;
+        }
+        Debug.Log("No available objects in pool.");
+        return null;
+    }
+
+    // Get an object from the pool, then rotate & position it in the world and activate
+    public GameObject Create(Transform at)
+    {
+        if (pool_.Count > 0)
+        {
+            GameObject obj = pool_[0];
+            active_pool_.Add(obj);
+            pool_.RemoveAt(0);
+
+            // Unique to this Create() method
+            obj.transform.position = at.position;
+            obj.transform.rotation = at.rotation;
+            obj.SetActive(true);
+
+            return obj;
+        }
+        Debug.Log("No available objects in pool.");
+        return null;
+    }
+
+    // Get an object from the pool, then rotate & position it in the world and activate
+    public GameObject Create(Vector3 position)
+    {
+        if (pool_.Count > 0)
+        {
+            GameObject obj = pool_[0];
+            active_pool_.Add(obj);
+            pool_.RemoveAt(0);
+
+            // Unique to this Create() method
+            obj.transform.position = position;
+            obj.SetActive(true);
+
+            return obj;
+        }
+        Debug.Log("No available objects in pool.");
+        return null;
+    }
+
+    // Get an object from the pool, then rotate & position it in the world and activate
+    public GameObject Create(Quaternion rotation)
+    {
+        if (pool_.Count > 0)
+        {
+            GameObject obj = pool_[0];
+            active_pool_.Add(obj);
+            pool_.RemoveAt(0);
+
+            // Unique to this Create() method
+            obj.transform.rotation = rotation;
+            obj.SetActive(true);
+
+            return obj;
+        }
+        Debug.Log("No available objects in pool.");
+        return null;
+    }
+
+    // Get an object from the pool, then rotate & position it in the world and activate
+    public GameObject Create(Vector3 position, Quaternion rotation)
+    {
+        if (pool_.Count > 0)
+        {
+            GameObject obj = pool_[0];
+            active_pool_.Add(obj);
+            pool_.RemoveAt(0);
+
+            // Unique to this Create() method
+            obj.transform.position = position;
+            obj.transform.rotation = rotation;
+            obj.SetActive(true);
 
             return obj;
         }

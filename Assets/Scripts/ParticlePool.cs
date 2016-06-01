@@ -16,35 +16,10 @@ public class ParticlePool : ObjectPool
 
         for (int i = 0; i < poolSize_; ++i)
         {
-            // This creates a transform position, then creates an object at that position, (opposite to the CubePool example)
-            Transform t = new GameObject().transform;
-            t.position = new Vector3(-4 * i, 0.0f, 0.0f);
-            Create(t);
+            // This creates a transform position, then creates an object at that position, (different to the CubePool example)
+            Vector3 position = new Vector3(-4 * i, 0.0f, 0.0f);
+            Create(position);
         }
-    }
-
-    // Overrides base class.
-    // Get an object from the pool, just activate it at whatever position it was before
-    new public GameObject Create()
-    {
-        GameObject obj = base.Create();
-        if (obj != null)
-        {
-            obj.SetActive(true);
-        }
-        return obj;
-    }
-
-    // Get an object from the pool, then position it in the world and activate
-    public GameObject Create(Transform at)
-    {
-        GameObject obj = base.Create();
-        if (obj != null)
-        {
-            obj.transform.position = at.position;
-            obj.SetActive(true);
-        }
-        return obj;
     }
 
 }

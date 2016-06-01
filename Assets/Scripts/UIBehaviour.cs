@@ -11,7 +11,8 @@ public class UIBehaviour : MonoBehaviour {
     {
         // Make sure the Cube Pool object is tagged appropriately in the editor, (FindWithTag is quicker than Find using strings)
         CubePool pool = GameObject.FindWithTag("CubePool").GetComponent<CubePool>();
-        GameObject obj = pool.Create();
+        // This will spawn a cube at whatever position it was already in before going inactive
+        pool.Create();
 	}
 
 }
